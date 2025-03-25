@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>शिकायत का पंजीकरण</title>
+    <style>
+        /* Styling for the body */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Header Styling */
+        header {
+            text-align: center;
+            background: #0078d7;
+            color: white;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Main Section Styling */
+        main {
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh; /* Center vertically */
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        form label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        form input {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            width: 100%;
+        }
+
+        form button {
+            padding: 12px;
+            background: #0078d7;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            align-self: center; /* Center align the button */
+            width: 50%; /* Adjust button width */
+        }
+
+        form button:hover {
+            background: #005bb5;
+        }
+
+        /* Footer Styling */
+        footer {
+            text-align: center;
+            background: #333;
+            color: white;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>शिकायत का पंजीकरण</h1>
+        <p>अपनी शिकायत का विवरण दर्ज करें</p>
+    </header>
+
+    <!-- Form Section -->
+    <main>
+        <form id="complaintForm">
+            <label for="applicantName">आवेदक का नाम:</label>
+            <input type="text" id="applicantName" name="applicantName" placeholder="अपना नाम दर्ज करें" required>
+
+            <label for="fatherName">पिता का नाम:</label>
+            <input type="text" id="fatherName" name="fatherName" placeholder="पिता का नाम दर्ज करें" required>
+
+            <label for="applicantAddress">आवेदक का पता:</label>
+            <input type="text" id="applicantAddress" name="applicantAddress" placeholder="पता दर्ज करें" required>
+
+            <label for="mobileNumber">मोबाइल नम्बर:</label>
+            <input type="text" id="mobileNumber" name="mobileNumber" placeholder="मोबाइल नम्बर दर्ज करें" required>
+
+            <label for="opponentDetails">विपक्षी का नाम व पता:</label>
+            <input type="text" id="opponentDetails" name="opponentDetails" placeholder="विपक्षी का नाम व पता दर्ज करें" required>
+
+            <label for="reason">विवाद का कारण:</label>
+            <input type="text" id="reason" name="reason" placeholder="विवाद का कारण दर्ज करें" required>
+
+            <label for="category">विवाद की श्रेणी:</label>
+            <input type="text" id="category" name="category" placeholder="विवाद की श्रेणी दर्ज करें" required>
+
+            <label for="feederName">फीडकर्ता का नाम व पीएनओ:</label>
+            <input type="text" id="feederName" name="feederName" placeholder="फीडकर्ता का नाम दर्ज करें" required>
+
+            <label for="investigatorName">जाँचकर्ता का नाम व पीएनओ:</label>
+            <input type="text" id="investigatorName" name="investigatorName" placeholder="जाँचकर्ता का नाम दर्ज करें" required>
+
+            <label for="investigatorMobile">जाँचकर्ता का मोबाइल नम्बर:</label>
+            <input type="text" id="investigatorMobile" name="investigatorMobile" placeholder="जाँचकर्ता का मोबाइल नम्बर दर्ज करें" required>
+
+            <button type="submit">सबमिट करें</button>
+        </form>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 शिकायत का पंजीकरण पोर्टल. सर्वाधिकार सुरक्षित।</p>
+    </footer>
+
+    <!-- JavaScript Section -->
+    <script>
+        document.getElementById('complaintForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            // Form data collection
+            const formData = new FormData(this);
+
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            // Append data to Google Sheets
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbyPxkYvBJ2xUsBbgP0vkgt4gpszz8vkKAhYY4Zo-aXje9qMBOJ3AmQIUgXHThb7ylBf/exec';
+
+            try {
+                const response = await fetch(scriptURL, {
+                    method: 'POST',
+                    body: new URLSearchParams(data),
+                });
+
+                if (response.ok) {
+                    alert('डेटा सफलतापूर्वक संग्रहीत किया गया!');
+                    this.reset(); // Reset the form
+                } else {
+                    alert('डेटा संग्रहीत करने में समस्या हुई।');
+                }
+            } catch (error) {
+                console.error('Error!', error.message);
+                alert('एक त्रुटि हुई। कृपया पुनः प्रयास करें।');
+            }
+        });
+    </script>
+</body>
+</html>

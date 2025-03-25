@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - भूमि विवाद निस्तारण पोर्टल</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>भूमि विवाद निस्तारण पोर्टल</h1>
+        <p>आपका स्वागत है! कृपया लॉगिन करें।</p>
+    </header>
+    <main class="login-container">
+        <h2>लॉगिन</h2>
+        <form id="loginForm">
+            <label for="role">रोल चुनें:</label>
+            <select id="role" name="role" required>
+                <option value="">-- रोल चुनें --</option>
+                <option value="station">थाना स्तर</option>
+                <option value="officer">अधिकारी स्तर</option>
+            </select>
+            <label for="username">उपयोगकर्ता नाम:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">पासवर्ड:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">लॉगिन करें</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2025 भूमि विवाद निस्तारण पोर्टल. सर्वाधिकार सुरक्षित।</p>
+    </footer>
+    <script src="js/login.js"></script>
+</body>
+</html>

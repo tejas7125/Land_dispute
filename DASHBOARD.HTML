@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            text-align: center;
+            background: #0078d7;
+            color: white;
+            padding: 10px 0;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #333;
+            padding: 10px 0;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: #0078d7;
+        }
+        main {
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table th, table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        table th {
+            background: #0078d7;
+            color: white;
+        }
+        .loading {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>DASHBOARD: POLICE STATION </h1>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="dashboard_station.html">Complaint Registration</a>
+        <a href="submit_report.html">Submit Report</a>
+        <a href="reports.html">Reports</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <h2>Registered Complaints</h2>
+        <div class="loading" id="loading">Loading data...</div>
+        <table id="complaintsTable" style="display:none;">
+            <thead>
+                <tr>
+                    <th>आवेदक का नाम</th>
+                    <th>पिता का नाम</th>
+                    <th>पता</th>
+                    <th>मोबाइल नम्बर</th>
+                    <th>विपक्षी का नाम व पता</th>
+                    <th>विवाद का कारण</th>
+                    <th>विवाद की श्रेणी</th>
+                    <th>फीडकर्ता</th>
+                    <th>जाँचकर्ता</th>
+                    <th>मोबाइल</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be dynamically added here -->
+            </tbody>
+        </table>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 भूमि विवाद निस्तारण पोर्टल. सर्वाधिकार सुरक्षित।</p>
+    </footer>
+
+    <script>
+        // Fetch data from Google Sheets
+        async function fetchComplaintsData() {
+            const sheetURL = 'https://script.google.com/macros/s/AKfycbyPxkYvBJ2xUsBbgP0vkgt4gpszz8vkKAhYY4Zo-aXje9qMBOJ3AmQIUgXHThb7ylBf/exec'; // Replace with your Script URL
+
+            try {
+                const response = await fetch(sheetURL);
+                const data = await response.json();
+
+                const table = document.getElementById('complaintsTable');
+                const tbody = table.querySelector('tbody');
+                const loading = document.getElementById('loading');
+
+                // Clear loading message
+                loading.style.display = 'none';
+                table.style.display = 'table';
+
+                // Populate table with data
+                data.forEach(row => {
+                    const tr = document.createElement('tr');
+                    row.forEach(cell => {
+                        const td = document.createElement('td');
+                        td.textContent = cell;
+                        tr.appendChild(td);
+                    });
+                    tbody.appendChild(tr);
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                document.getElementById('loading').textContent = 'Failed to load data.';
+            }
+        }
+
+        // Load data on page load
+        window.onload = fetchComplaintsData;
+    </script>
+</body>
+</html>

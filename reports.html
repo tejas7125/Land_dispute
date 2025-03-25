@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - Grievance Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h2>Reports</h2>
+        <p>Search for and view complaint reports</p>
+    </header>
+    <section>
+        <form id="reportSearchForm">
+            <label for="searchField">Search by Complaint Number:</label>
+            <input type="text" id="searchField" name="searchField" required>
+            <button type="submit">Search</button>
+        </form>
+        <table id="reportsTable">
+            <thead>
+                <tr>
+                    <th>Complaint Number</th>
+                    <th>Applicant Name</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dynamic data will be loaded here -->
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>

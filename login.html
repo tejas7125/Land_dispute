@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Grievance Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Grievance Portal</h1>
+        <p>Login to access your role</p>
+    </header>
+    <main class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <!-- रोल का चयन -->
+            <label for="role">Select Role:</label>
+            <select id="role" name="role" required>
+                <option value="">-- Select Role --</option>
+                <option value="station">थाना स्तर</option>
+                <option value="officer">अधिकारी स्तर</option>
+            </select>
+
+            <!-- उपयोगकर्ता नाम -->
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+            <!-- पासवर्ड -->
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+            <!-- सबमिट बटन -->
+            <button type="submit">Login</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2025 Grievance Portal</p>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
